@@ -43,7 +43,7 @@ model Hunch {
   id String @id @default(cuid())
   userId String
   gameId String
-  HomeTeamScore Int
+  homeTeamScore Int
   awayTeamScore Int
 
   user   User   @relation(fields: [userId], references: [id])

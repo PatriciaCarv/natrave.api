@@ -10,14 +10,25 @@ export const create = async ctx => {
     const password = await bcrypt.hash(ctx.request.body.password, 10)
     const data = {
         name: ctx.request.body.name,
-        usename: ctx.request.body.username,
+        username: ctx.request.body.username,
         email: ctx.request.body.email,
         password,
     }
-
+    
     try {
         const { password, ...user} = await prisma.user.create({ data })
-        ctx.body = user
+
+        const accessToken = jwt.sign({
+            sub: user.id,
+            name: user.name,
+            expiresIn: "7d"
+        }, process.env.JWT_SECRET)
+    
+        ctx.body = {
+            user: user,
+            accessToken
+        }
+
         ctx.status = 201
     } catch(error) {
         console.log (error)
@@ -54,6 +65,7 @@ export const login = async ctx => {
         expiresIn: "7d"
     }, process.env.JWT_SECRET)
 
+    ctx.status = 201
     ctx.body = {
         user: result,
         accessToken

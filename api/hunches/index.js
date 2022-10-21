@@ -60,3 +60,15 @@ export const create = async ctx => {
     }
 }
 
+export const list = async ctx => {
+    
+    try {
+        const hunches = await prisma.hunch.findMany()
+        ctx.body = hunches
+        ctx.status = 200
+    } catch(error) {
+        console.log (error)
+        ctx.body = error
+        ctx.status = 500
+    }
+}

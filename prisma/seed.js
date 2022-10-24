@@ -247,14 +247,9 @@ const game = [
   ]
 
 const main = () => {
-  /*prisma.game.deleteMany{
-    where: {
-      id
-    }
-  }*/
-    prisma.game.createMany({
-        data: game
-    })
+  return prisma.game.createMany({
+      data: game
+  })
 }
 
   main()

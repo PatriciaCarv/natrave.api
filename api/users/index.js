@@ -12,35 +12,36 @@ export const create = async ctx => {
         name: ctx.request.body.name,
         username: ctx.request.body.username,
         email: ctx.request.body.email,
-        password,
+        password: password,
     }
-    
-    try {
-        const { password, ...user} = await prisma.user.create({ data })
+
+    try{
+        const  user = await prisma.user.create({ data })
+        const { password, ...result } = user
 
         const accessToken = jwt.sign({
             sub: user.id,
-            name: user.name,
-            expiresIn: "7d"
+            name: user.name
         }, process.env.JWT_SECRET)
-    
         ctx.body = {
-            user: user,
+            user: result,
             accessToken
         }
-
         ctx.status = 201
-    } catch(error) {
-        console.log (error)
+    } catch( error) {
+        console.log(error)
         ctx.body = error
         ctx.status = 500
     }
 }
 
+const atob = function(b64Encoded) {return Buffer.from(b64Encoded, 'base64').toString('utf8');}
+
 export const login = async ctx => {
     const [type, token] = ctx.headers.authorization.split(" ")
-    const [email, plainTextpassword] = atob(token).split(":")
-
+    
+    const [ email, plainTextPassword ] = atob(token).split(":")
+    
     const user = await prisma.user.findUnique({
         where: { email }
     })
@@ -50,22 +51,19 @@ export const login = async ctx => {
         return
     }
 
-    const passwordMatch = await bcrypt.compare(plainTextpassword, user.password)
+    const passwordMatch = await bcrypt.compare(plainTextPassword, user.password)
 
     if (!passwordMatch) {
         ctx.status = 404
         return
     }
 
-    const {password, ...result } = user
+    const { password, ...result } = user
 
     const accessToken = jwt.sign({
         sub: user.id,
-        name: user.name,
-        expiresIn: "7d"
+        name: user.name
     }, process.env.JWT_SECRET)
-
-    ctx.status = 201
     ctx.body = {
         user: result,
         accessToken

@@ -1,6 +1,5 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
-// forcar deploy do projeto
 
 generator client {
   provider = "prisma-client-js"
@@ -21,7 +20,7 @@ model User {
   password String
 
   createdAt DateTime @default(now())
-  updateAt DateTime @updatedAt
+  updatedAt DateTime @updatedAt
 
   hunches Hunch[]
 }
@@ -33,35 +32,23 @@ model Game {
   gameTime DateTime
 
   createdAt DateTime @default(now())
-  updateAt DateTime @updatedAt
+  updatedAt DateTime @updatedAt
 
-  hunches Hunch []
+  hunches Hunch[]
 
   @@unique([homeTeam, awayTeam, gameTime])
 }
 
-model Hunch {
+model Hunch{
   id String @id @default(cuid())
   userId String
   gameId String
   homeTeamScore Int
   awayTeamScore Int
 
-  user   User   @relation(fields: [userId], references: [id])
-  game   Game   @relation(fields: [gameId], references: [id])
+  user User @relation(fields: [userId], references: [id])
+  game Game @relation(fields: [gameId], references: [id])
 
   createdAt DateTime @default(now())
-  updateAt DateTime @updatedAt
-}
-
-model Pet {
-  id String @id @default(cuid())
-  name String
-  idade Int
-}
-
-model Hahahaha {
-  id String @id @default(cuid())
-  name String
-  idade Int
+  updatedAt DateTime @updatedAt
 }

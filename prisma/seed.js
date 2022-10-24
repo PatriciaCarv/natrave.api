@@ -246,10 +246,16 @@ const game = [
     }
   ]
 
-const main = () =>
+const main = () => {
+  /*prisma.game.deleteMany{
+    where: {
+      id
+    }
+  }*/
     prisma.game.createMany({
         data: game
     })
+}
 
   main()
     .then(console.log)

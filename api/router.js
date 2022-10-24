@@ -17,10 +17,4 @@ router.post ('/hunches', hunches.create)
 router.get('/games', games.list)
 
 router.get('/:username', users.hunches)
-
-
-router.get('/pets', pets.list)
-router.post ('/pets', pets.create)
-
-
-
+router.get('/users', users.list)

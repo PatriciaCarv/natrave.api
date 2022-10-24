@@ -96,3 +96,14 @@ export const hunches = async ctx => {
         hunches
     }
 }
+
+export const list = async (ctx) => {
+    try{
+        const users = await prisma.user.findMany();
+        ctx.body = users
+        ctx.status = 200
+    } catch( error) {
+        ctx.body = error
+        ctx.status = 500
+    }
+}

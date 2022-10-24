@@ -4,8 +4,6 @@ import * as users  from './users/index.js'
 import * as hunches from './hunches/index.js'
 import * as games  from './games/index.js'
 
-import * as pets  from './pets/index.js'
-
 export const router = new Router ()
 
 router.get('/login', users.login)

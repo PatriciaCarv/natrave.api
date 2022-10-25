@@ -6,7 +6,7 @@ import * as games  from './games/index.js'
 
 export const router = new Router ()
 
-router.get('/login', users.login)
+// router.get('/login', users.login)
 router.post ('/users', users.create)
 
 router.get('/hunches', hunches.list)

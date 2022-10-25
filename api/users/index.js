@@ -6,7 +6,7 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient ()
 
 
-export const create = async ctx => {
+/*export const create = async ctx => {
     const password = await bcrypt.hash(ctx.request.body.password, 10)
     const data = {
         name: ctx.request.body.name,
@@ -68,7 +68,7 @@ export const login = async ctx => {
         user: result,
         accessToken
     }
-}
+}*/
 
 export const list = async (ctx) => {
     try{

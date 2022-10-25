@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken'
 
 import { PrismaClient } from '@prisma/client'
 
-const prisma = new PrismaClient ()
+const prisma = new PrismaClient()
 
 
 /*export const create = async ctx => {
@@ -72,7 +72,7 @@ export const login = async ctx => {
 
 export const list = async (ctx) => {
     try{
-        const users = await prisma.user.findMany();
+        const users = await prisma.user.findMany()
         ctx.status = 200
         ctx.body = users
         console.log(users)

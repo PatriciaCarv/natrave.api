@@ -1,8 +1,9 @@
 import jwt from 'jsonwebtoken'
 import { PrismaClient } from '@prisma/client'
+
 const prisma = new PrismaClient ()
 
-export const create = async ctx => {
+/*export const create = async ctx => {
     if (!ctx.headers.authorization) {
         ctx.status = 401
         return 
@@ -71,4 +72,4 @@ export const list = async ctx => {
         ctx.body = error
         ctx.status = 500
     }
-}
+}*/

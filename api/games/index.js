@@ -3,7 +3,7 @@ import { addDays, formatISO } from 'date-fns'
 
 const prisma = new PrismaClient ()
 
-export const list = async ctx => {
+/*export const list = async ctx => {
     const currentDate =  ctx.request.query.gameTime
     
     const where = currentDate ? {
@@ -22,4 +22,4 @@ export const list = async ctx => {
         ctx.body = error
         ctx.status = 500
     }
-}
+}*/

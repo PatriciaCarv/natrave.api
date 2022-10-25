@@ -73,10 +73,14 @@ export const login = async ctx => {
 export const list = async (ctx) => {
     try{
         const users = await prisma.user.findMany();
-        ctx.body = users
         ctx.status = 200
+        ctx.body = users
+        console.log(users)
+        console.log('deu certo')
     } catch( error) {
-        ctx.body = error
+        console.log('deu erro')
+        console.log(error)
         ctx.status = 500
+        ctx.body = error
     }
 }

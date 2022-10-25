@@ -246,12 +246,11 @@ const game = [
     }
   ]
 
-const main = () => {
-  return prisma.game.createMany({
-      data: game
+const main = () => 
+  prisma.game.createMany({
+    data: game
   })
-}
 
-  main()
-    .then(console.log)
-    .catch(console.log)
+main()
+  .then(console.log)
+  .catch(console.log)

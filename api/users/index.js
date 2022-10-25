@@ -1,12 +1,10 @@
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
+import { PrismaClient } from "@prisma/client"
 
-import { PrismaClient } from '@prisma/client'
+const prisma = new PrismaClient();
 
-const prisma = new PrismaClient()
-
-
-/*export const create = async ctx => {
+export const create = async (ctx) => {
     const password = await bcrypt.hash(ctx.request.body.password, 10)
     const data = {
         name: ctx.request.body.name,
@@ -30,6 +28,17 @@ const prisma = new PrismaClient()
         ctx.status = 201
     } catch( error) {
         console.log(error)
+        ctx.body = error
+        ctx.status = 500
+    }
+}
+
+export const list = async (ctx) => {
+    try{
+        const users = await prisma.user.findMany();
+        ctx.body = users
+        ctx.status = 200
+    } catch( error) {
         ctx.body = error
         ctx.status = 500
     }
@@ -67,20 +76,5 @@ export const login = async ctx => {
     ctx.body = {
         user: result,
         accessToken
-    }
-}*/
-
-export const list = async (ctx) => {
-    try{
-        const users = await prisma.user.findMany()
-        ctx.status = 200
-        ctx.body = users
-        console.log(users)
-        console.log('deu certo')
-    } catch( error) {
-        console.log('deu erro')
-        console.log(error)
-        ctx.status = 500
-        ctx.body = error
     }
 }

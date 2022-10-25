@@ -19,9 +19,6 @@ model User {
   username String @unique
   password String
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
   hunches Hunch[]
 }
 
@@ -30,9 +27,6 @@ model Game {
   homeTeam String
   awayTeam String
   gameTime DateTime
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 
   hunches Hunch[]
 
@@ -48,7 +42,4 @@ model Hunch{
 
   user User @relation(fields: [userId], references: [id])
   game Game @relation(fields: [gameId], references: [id])
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 }
